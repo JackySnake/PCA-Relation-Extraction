@@ -1,0 +1,36 @@
+{
+    "model": "PCA",
+
+    "model_class_params": {
+        "seed"      : 123,
+        "n_threads" : 1
+    },
+
+    "model_hyperparams": {
+        "print_freq"     : 5,
+        "lr"             : 0.001,
+        "word_emb_dim"   : 300,
+        "dev_ckpt_delay" : 0.1,
+        "n_epochs"       : 200,
+        "l"              : 0,
+        "r"              : 1,
+        "batch_size"     : 100,
+        "window_size"    : 1,
+        "asymmetric"     : false,
+        "char"           : false,
+        "cont_feat"      : true,
+        "sent_feat"      : true
+    },
+
+    "model_param_grid": {
+        "window_size"   : [0, 1, 2, 3],
+        "batch_size"    : [64, 128, 256],
+        "lr"            : [1e-4, 1e-3, 1e-2],
+        "rebalance"     : [0.0, 0.5],
+        "l"             : [0, 1, 2],
+        "r"             : [0, 1, 2],
+        "n_epochs"      : [50, 100, 200],
+        "word_emb_path" : ["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec",
+			               "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"]
+    }
+}

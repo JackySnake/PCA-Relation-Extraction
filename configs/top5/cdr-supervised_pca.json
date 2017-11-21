@@ -1,0 +1,10 @@
+{
+    "param_names": ["batch_size", "l", "lr", "n_epochs", "r", "rebalance", "window_size", "word_emb_path"],
+    "params": [
+        [64, 0, 0.001, 100, 0, 0.0, 3, "data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec"],
+        [128, 0, 0.001, 200, 0, 0.5, 3, "data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec"],
+        [256, 0, 0.01, 100, 0, 0.5, 2, "data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec"],
+        [128, 0, 0.001, 50, 0, 0.5, 1, "data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec"],
+        [128, 2, 0.001, 200, 0, 0.5, 1, "data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec"]
+    ]
+}

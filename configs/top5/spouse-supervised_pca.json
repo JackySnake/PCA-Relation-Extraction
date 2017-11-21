@@ -1,0 +1,10 @@
+{
+    "param_names": ["batch_size", "l", "lr", "r", "rebalance", "window_size", "word_emb_path"],
+    "params": [
+        [64, 1, 0.01, 0, 0.0, 2, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [256, 0, 0.01, 1, 0.0, 1, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [64, 1, 0.01, 0, 0.0, 1, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [64, 2, 0.01, 1, 0.0, 1, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [64, 0, 0.01, 1, 0.0, 1, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"]
+    ]
+}

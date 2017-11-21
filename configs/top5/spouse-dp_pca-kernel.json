@@ -1,0 +1,10 @@
+{
+    "param_names": ["batch_size", "decay", "l", "lr", "n_epochs", "r", "rebalance", "window_size", "word_emb_path"],
+    "params": [
+        [128, 0.8, 1, 0.01, 200, 0, 0.0, 2, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [128, 0.9, 0, 0.001, 200, 0, 0.0, 2, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [256, 0.99, 0, 0.01, 50, 0, 0.0, 2, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [64, 0.95, 2, 0.001, 200, 0, 0.0, 2, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"],
+        [64, 0.99, 2, 0.001, 200, 0, 0.0, 3, "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"]
+    ]
+}

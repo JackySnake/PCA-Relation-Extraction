@@ -1,0 +1,31 @@
+{
+	"model": "LSTM",
+
+	"model_class_params": {
+		"seed"      : 123,
+		"n_threads" : 1
+	},
+
+	"model_hyperparams": {
+		"batch_size"          : 128,
+		"word_emb_dim"        : 300,
+		"print_freq"          : 5,
+		"dev_ckpt_delay"      : 0.10,
+		"attention"           : false,
+		"load_emb"            : false,
+		"max_sentence_length" : 100,
+		"n_epochs"            : 200,
+		"rebalance"           : 0.0,
+		"patience"            : 50
+	},
+
+	"model_param_grid": {
+		"batch_size"      : [64, 128, 256],
+		"lr"              : [1e-4, 1e-3, 1e-2],
+		"dropout"         : [0.25, 0.5],
+		"lstm_hidden_dim" : [100, 200, 400],
+		"n_epochs"        : [200],
+		"word_emb_path"   : ["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec",
+			                 "data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec"]
+    }
+}
