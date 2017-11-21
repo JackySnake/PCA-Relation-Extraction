@@ -1,23 +1,42 @@
-
-#PCA-based Relation Extraction
+# PCA-based Relation Extraction
 This is the code release for the method described in the blog post [A Fast Baseline for Sentence Representation Learning (Spoiler Alert: It’s PCA and Logistic Regression)](https://hazyresearch.github.io/snorkel/blog/pca_lstm)
 
 
 ## Installation
 
-Our experiments are build using [Snorkel](), Stanford's data creation and management systems, and a lightweight experimental framework for conducting model search.
+Our experiments are build using [Snorkel](https://hazyresearch.github.io/snorkel/), Stanford's data creation and management systems, and a lightweight experimental framework for conducting model search.
 
-Installation is easiest if you download and install `conda`. 
+Installation is easiest if you download and install `conda` and follow the instructions on Snorkel's [GitHub](https://github.com/HazyResearch/snorkel) page.
 
-`conda install snorkel`
+Once Snorkel is installed, run 
 
-The PCA-based method requires pre-trained word embeddings. You can use any of the standard public embedding datasets (e.g., [GloVe](https://nlp.stanford.edu/projects/glove/)). We custom trained embeddings from Wikipedia and PubMed using [FastText](https://github.com/facebookresearch/fastText) and [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). 
+```
+$ ./install.sh
+$ source ./set_env.sh
+```
 
-You can download our exact embeddings using `./download_data.sh`
+## Embeddings
+The PCA-based method requires pre-trained word embeddings. We trained our own embeddings with Wikipedia and PubMed data using [FastText](https://github.com/facebookresearch/fastText) and Gensim's implementation of [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). You can install our embeddings using:
+`./download.sh`
+
+You can use also one of many public embedding datasets:
+
+- [GloVe](https://nlp.stanford.edu/projects/glove/) Common Crawl
+- [FastText](https://fasttext.cc/docs/en/english-vectors.html) Wiki-News / Common Crawl
+- [PubMed Biomedical](<https://drive.google.com/open?id=0BzMCqpcgEJgiUWs0ZnU0NlFTam8>) (Chiu et al. 2016)
+
+
 
 ## Quick Start
 
-`python benchmark.py --info` prints all available datasets.  All BiLSTM and PCA model configurations are JSON files found in `config/`.
+The following datasets are included here (more the blog for more details):
+
+- `cdr-supervised` 
+- `cdr-dp` 
+- `spouse-supervised`
+- `spouse-db`
+
+All BiLSTM and PCA model configurations are JSON files found in `config/`.
 
 The flag `--debug` trains on a 10% subset of data and is useful to test your installation.
 
@@ -25,18 +44,18 @@ The flag `--debug` trains on a 10% subset of data and is useful to test your ins
 
 ## Training Models
 
-###Train a basic BiLSTM
+### Train a basic BiLSTM
 
 `python benchmark.py -d cdr-supervised --config configs/lstm.json --n_model_search 1 -E 50`
 
 This trains a BiLSTM *without* pre-trained embeddings for 50 epochs. 
 You can override any of the parameters specified in the model JSON by passing in a string of of the format `<PARAM_NAME>=<VALUE>` seperated by a comma. 
 
-###Train a BiLSTM + attention model with FastText embeddings
+### Train a BiLSTM + attention model with FastText embeddings
 
 `python benchmark.py -d cdr-supervised --config configs/lstm.json -p attention=True,word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" --n_model_search 1 -E 50`
 
-###Train a PCA + Exp. Decay model with FastText embeddings
+### Train a PCA + Exp. Decay model with FastText embeddings
 
 `python benchmark.py -d cdr-supervised --config configs/pca-kernel.json -p word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" --n_model_search 1 -E 50`
 
@@ -50,14 +69,14 @@ We searched over 50 models for our inital experiments. The top 5 parameter confi
 
 ## Running Experimental Benchmarks
 
-You can replicate the experiments described in the blog post by running the jobs from [script](). 
+You can replicate the experiments described in the blog post by running the jobs from [script](https://github.com/HazyResearch/PCA-Relation-Extraction/blob/master/experiments.sh). 
 
-This trains 80 models. We distributed our experiments across several machines and ran the BiLSTMs on GPUs. 
+**Warning**: this trains 80 models. We distributed our experiments across several machines and ran the BiLSTMs on GPUs. 
 
 
-##Citations
+## Citations
 
-If you use this work, please cite us as:
+If you use this work in any way, please cite us as:
 
 ```
 Fries, J., Wu, S., Choi, K., Marsden, A., R{\'e}, C., "A Fast Baseline for Sentence Representation Learning (Spoiler Alert: It’s PCA and Logistic Regression)", HazyResearch, 2017. https://hazyresearch.github.io/snorkel/blog/pca_lstm
@@ -72,4 +91,3 @@ Fries, J., Wu, S., Choi, K., Marsden, A., R{\'e}, C., "A Fast Baseline for Sente
   url = {https://hazyresearch.github.io/snorkel/blog/pca_lstm}
 }
 ```
-

@@ -1,19 +1,9 @@
 #!/usr/bin/env bash
 
-# manually install Snorkel and dependencies
-git clone https://github.com/HazyResearch/snorkel.git
-mv snorkel snorkel-core
-cd snorkel-core
+# hack for installing snorkel
+unzip deps.zip
 
-# Make sure the submodules are installed
-git submodule update --init --recursive
-pip install --requirement python-package-requirement.txt
-
-cd ../
-ln -s snorkel-core/snorkel .
-ln -s snorkel-core/treedlib .
-ln -s snorkel-core/tree_structs.py .
-
+# set pathing
 source set_env.sh
 
 # unzip our database files
