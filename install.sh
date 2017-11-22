@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # hack for installing snorkel
-unzip deps.zip
+tar -xvf deps.tar.gz
 
 # set pathing
 source set_env.sh
