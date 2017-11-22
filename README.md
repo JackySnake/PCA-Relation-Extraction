@@ -6,14 +6,41 @@ This is the code release for the method described in the blog post [A Fast Basel
 
 Our experiments are built using [Snorkel](https://hazyresearch.github.io/snorkel/), Stanford's data creation and management systems, and a lightweight experimental framework for conducting model search.
 
-Setup is easiest if you install Snorkel following the instructions on Snorkel's [GitHub](https://github.com/HazyResearch/snorkel) page.
+### Snorkel Dependencies
+If you already have Snorkel and [PyTorch](http://pytorch.org/) running, you can skip this section. 
 
-Once Snorkel is installed, run 
+Setup is easiest if you install [miniconda](https://conda.io/miniconda.html) and create a custom enviornment for Python 2.7
 
 ```
-$ ./install.sh
-$ source ./set_env.sh
+conda create -n py27 python=2.7
+source activate py27
 ```
+Then install all Snorkel dependencies:
+
+```
+conda install numba
+pip install --requirement python-package-requirement.txt
+```
+
+Install PyTorch for Linux (see [here](http://pytorch.org/) for OSX)
+
+```
+conda install pytorch torchvision cuda80 -c soumith
+```
+
+### Installing PCA/LSTM Code
+ 
+Once all dependencies are installed, run 
+
+```
+./install.sh
+```
+Snorkel requires a `SNORKELHOME` enviornment variable pointing to the parent directory of your install. On Linux/OSX, you can manuallly add this to your bash setup by editing `.bashrc` or `.bash_profile`. Otherwise, just run this script to temporarily setup your enviornment.
+
+```
+source ./set_env.sh
+```
+
 
 ## Download Embeddings
 The PCA-based method requires pre-trained word embeddings. We trained our own embeddings with Wikipedia and PubMed data using [FastText](https://github.com/facebookresearch/fastText) and Gensim's implementation of [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). You can download our embeddings using:
