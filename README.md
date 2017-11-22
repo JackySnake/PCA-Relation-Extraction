@@ -42,8 +42,11 @@ source ./set_env.sh
 
 
 ## Download Embeddings
-The PCA-based method requires pre-trained word embeddings. We trained our own embeddings with Wikipedia and PubMed data using [FastText](https://github.com/facebookresearch/fastText) and Gensim's implementation of [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). You can download our embeddings using:
-`./download.sh` (7.7GB compressed).
+The PCA-based method requires pre-trained word embeddings. We trained our own embeddings with Wikipedia and PubMed data using [FastText](https://github.com/facebookresearch/fastText) and Gensim's implementation of [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). You can download our embeddings (7.7GB compressed) using:
+
+```
+./download.sh
+``` 
 
 You can use also any public embedding datasets:
 

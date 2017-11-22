@@ -14,7 +14,7 @@ conda install "sqlalchemy>=1.0.14" -y
 conda install "tensorflow>=1.0" -y
 conda install six -y
 conda install numba -y
-conda install tika -y
+#conda install tika -y
 conda install psycopg2 -y
 conda install spacy -y
 conda install future -y
