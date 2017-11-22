@@ -15,11 +15,10 @@ Setup is easiest if you install [miniconda](https://conda.io/miniconda.html) and
 conda create -n py27 python=2.7
 source activate py27
 ```
-Then install all Snorkel dependencies:
+Then install all Snorkel dependencies
 
 ```
-conda install numba
-pip install --requirement python-package-requirement.txt
+./install_deps.sh
 ```
 
 Install PyTorch for Linux (see [here](http://pytorch.org/) for OSX)
@@ -30,7 +29,7 @@ conda install pytorch torchvision cuda80 -c soumith
 
 ### Installing PCA/LSTM Code
  
-Once all dependencies are installed, run 
+Once all Snorkel dependencies are installed, run 
 
 ```
 ./install.sh
