@@ -3,9 +3,6 @@
 # hack for installing snorkel
 tar -xvf deps.tar.gz
 
-# set pathing
-source set_env.sh
-
 # unzip our database files
 cd data/db/
 bunzip2 cdr.db.bz2

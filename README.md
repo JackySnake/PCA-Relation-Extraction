@@ -19,7 +19,7 @@ $ source ./set_env.sh
 The PCA-based method requires pre-trained word embeddings. We trained our own embeddings with Wikipedia and PubMed data using [FastText](https://github.com/facebookresearch/fastText) and Gensim's implementation of [word2vec](https://radimrehurek.com/gensim/models/word2vec.html). You can download our embeddings using:
 `./download.sh` (7.7GB compressed).
 
-You can use also one of many public embedding datasets:
+You can use also any public embedding datasets:
 
 - [GloVe](https://nlp.stanford.edu/projects/glove/) Common Crawl
 - [FastText](https://fasttext.cc/docs/en/english-vectors.html) Wiki-News / Common Crawl
@@ -29,7 +29,7 @@ When running models, just change the `word_emb_path` parameter to point to your 
 
 ## Quick Start
 
-The following datasets are included here (see the blog for more details):
+The following datasets are included here (see the blog for more details). They were generated using the Snorkel tutorials found [here](https://github.com/HazyResearch/snorkel/tree/master/tutorials).
 
 - `cdr-supervised` 
 - `cdr-dp` 
@@ -69,7 +69,7 @@ We searched over 50 models for our inital experiments. The top 5 parameter confi
 
 ## Running Experimental Benchmarks
 
-You can replicate the experiments described in the blog post by running the jobs from [script](https://github.com/HazyResearch/PCA-Relation-Extraction/blob/master/experiments.sh). 
+You can replicate the core experiments described in our blog post by running the jobs from [script](https://github.com/HazyResearch/PCA-Relation-Extraction/blob/master/experiments.sh). 
 
 **Warning**: this trains 80 models. We distributed our experiments across several machines and ran the BiLSTMs on GPUs. 
 
