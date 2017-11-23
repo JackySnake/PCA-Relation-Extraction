@@ -4,7 +4,7 @@ Evaluation Pipeline
 This is a lightweight script for testing models on various Snorkel datasets
 
 """
-from __future__ import print_function
+3from __future__ import print_function
 import os
 import sys
 import json
@@ -23,6 +23,7 @@ pandas.set_option('display.max_columns', 500)
 pandas.set_option('display.width', 1000)
 
 logger = logging.getLogger(__name__)
+
 
 @timeit
 def train(X_train, y_train, X_dev, y_dev, X_test, y_test, model_save_dir, model_class,
@@ -53,7 +54,8 @@ def train(X_train, y_train, X_dev, y_dev, X_test, y_test, model_save_dir, model_
     from snorkel.learning import RandomSearch
 
     # Initialize pre-trained embedding dictionary
-    if 'load_emb' in model_hyperparams and model_hyperparams['load_emb']:
+    if use_pretrained_embs(model_hyperparams, model_param_grid, manual_param_grid):
+        model_hyperparams["load_emb"] = True
         model_hyperparams["init_pretrained"] = {"train": X_train, "test": [X_dev, X_test]}
 
     if num_model_search > 1:
@@ -125,6 +127,27 @@ def convert_param_string(s):
             config[param] = False
 
     return config
+
+
+def use_pretrained_embs(model_hyperparams, model_param_grid, manual_param_grid):
+    """
+    This ugly function checks if word embeddings are defined
+    anywhere in our model configurations.
+
+    :param model_hyperparams:
+    :param model_param_grid:
+    :param manual_param_grid:
+    :return:
+    """
+    if 'load_emb' in model_hyperparams and model_hyperparams['load_emb']:
+        return True
+    if "word_emb_path" in model_hyperparams and model_hyperparams["word_emb_path"]:
+        return True
+    if "word_emb_path" in model_param_grid and model_param_grid["word_emb_path"]:
+        return True
+    if "word_emb_path" in manual_param_grid["param_names"]:
+        return True
+    return False
 
 
 def get_model_config(args, verbose=True):
