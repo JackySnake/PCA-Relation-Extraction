@@ -1,7 +1,6 @@
 # PCA-based Relation Extraction
 This is the code release for the method described in the blog post [A Fast Baseline for Sentence Representation Learning (Spoiler Alert: It’s PCA and Logistic Regression)](https://hazyresearch.github.io/snorkel/blog/pca_lstm)
 
-
 ## Installation
 
 Our experiments are built using [Snorkel](https://hazyresearch.github.io/snorkel/), Stanford's data creation and management systems, and a lightweight experimental framework for conducting model search.
@@ -70,7 +69,7 @@ All BiLSTM and PCA model configurations are JSON files found in `config/`.
 The flag `--debug` trains on a 10% subset of data and is useful to test your installation.
 
 ```
-python benchmark.py --dataset cdr-supervised --config configs/lstm.json --n_epochs 10 --debug
+python benchmark.py --dataset cdr-supervised --model lstm --n_epochs 10 --debug
 ```
 
 ## Training Models
@@ -114,10 +113,10 @@ optional arguments:
 ### Train a basic BiLSTM
 
 ```
-python benchmark.py -d cdr-supervised -c configs/lstm.json -N 1 -E 50
+python benchmark.py --dataset cdr-supervised --model lstm -N 1 -E 50
 ```
 
-This trains a BiLSTM *without* pre-trained embeddings for 50 epochs. 
+This trains a basic BiLSTM *without* pre-trained embeddings for 50 epochs. 
 
 ### Train a BiLSTM + attention model with FastText embeddings
 
@@ -140,7 +139,7 @@ Our config files contain the same hyperparameter search space used in our experi
 python benchmark.py -d cdr-supervised -c configs/lstm.json -N 5 -E 50
 ```
 
-We searched over 50 models for our inital experiments. The top 5 parameter configurations we found for BiLSTMs and PCA are in `config/top5/`.
+We searched over 50 models for our inital experiments. The top 5 parameter configurations we found for BiLSTMs and PCA are in `configs/top5/`.
 
 
 ## Running Experimental Benchmarks

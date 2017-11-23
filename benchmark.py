@@ -44,7 +44,8 @@ def train(X_train, y_train, X_dev, y_dev, X_test, y_test, model_save_dir, model_
     :param model_class_params:  disc. model default class init params
     :param model_hyperparams:   disc. model defaults
     :param model_param_grid:    grid search space
-    :param n_epochs:            training epochs (overridden by `model_param_grid`)
+    :param manual_param_grid:   manual param grid (this overrides model_param_grid)
+    :param n_epochs:            training epochs
     :param num_model_search:    number of models to search over
     :param num_workers:         grid search workers
     :param seed:                PyTorch random seed

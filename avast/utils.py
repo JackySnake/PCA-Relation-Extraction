@@ -196,7 +196,7 @@ def use_pretrained_embs(model_hyperparams, model_param_grid, manual_param_grid):
         return True
     if "word_emb_path" in model_param_grid and model_param_grid["word_emb_path"]:
         return True
-    if "word_emb_path" in manual_param_grid["param_names"]:
+    if "word_emb_path" in manual_param_grid and manual_param_grid["param_names"]:
         return True
     return False
 
@@ -248,7 +248,7 @@ def get_model_config(args, verbose=True):
             # also override in the param grid
             if name in model_param_grid:
                 model_param_grid[name] = [params[name]]
-                
+
     logger.info(model_param_grid)
     # override model params from command line
     model_class_params['seed']       = args.seed
