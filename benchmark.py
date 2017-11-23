@@ -174,6 +174,7 @@ def get_model_config(args, verbose=True):
 
     # override model params from command line
     model_class_params['seed']       = args.seed
+    model_class_params['n_threads']  = args.n_procs
     model_hyperparams['n_epochs']    = args.n_epochs
     model_hyperparams['host_device'] = args.host_device
 
@@ -244,6 +245,7 @@ if __name__ == "__main__":
 
     argparser.add_argument("-N", "--n_model_search", type=int, default=1, help="number of models to search over")
     argparser.add_argument("-E", "--n_epochs", type=int, default=1, help="number of training epochs")
+    argparser.add_argument("-M", "--n_procs", type=int, default=1, help="number processes (per model, CPU only)")
     argparser.add_argument("-W", "--n_workers", type=int, default=1, help="number of grid search workers")
     argparser.add_argument("-H", "--host_device", type=str, default="cpu", help="Host device (GPU|CPU)")
 
