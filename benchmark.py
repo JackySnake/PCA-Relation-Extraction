@@ -4,7 +4,7 @@ Evaluation Pipeline
 This is a lightweight script for testing models on various Snorkel datasets
 
 """
-3from __future__ import print_function
+from __future__ import print_function
 import os
 import sys
 import json
@@ -98,113 +98,6 @@ def score(X_test, y_test, model, b=0.5):
     y_pred         = np.array([0 if marginals[i] < b else 1 for i in range(len(marginals))])
     tp, fp, tn, fn = error_analysis(X_test, y_test, y_pred)
     print_scores(len(tp), len(fp), len(tn), len(fn), title='Test Set Scores')
-
-
-def convert_param_string(s):
-    """
-    Convert string of hyperparamters into typed dictionary
-    e.g., `lr=0.001,rebalance=False,attention=True`
-
-    :param s:
-    :return:
-    """
-    config = dict([p.split("=") for p in s.split(",")])
-
-    # force typecasting in this order
-    types = [int, float]
-    for param in config:
-        v = config[param]
-        for t in types:
-            try:
-                v = t(v)
-            except:
-                continue
-            config[param] = v
-            break
-        if config[param] in ['true','True']:
-            config[param] = True
-        elif config[param] in ['false','False']:
-            config[param] = False
-
-    return config
-
-
-def use_pretrained_embs(model_hyperparams, model_param_grid, manual_param_grid):
-    """
-    This ugly function checks if word embeddings are defined
-    anywhere in our model configurations.
-
-    :param model_hyperparams:
-    :param model_param_grid:
-    :param manual_param_grid:
-    :return:
-    """
-    if 'load_emb' in model_hyperparams and model_hyperparams['load_emb']:
-        return True
-    if "word_emb_path" in model_hyperparams and model_hyperparams["word_emb_path"]:
-        return True
-    if "word_emb_path" in model_param_grid and model_param_grid["word_emb_path"]:
-        return True
-    if "word_emb_path" in manual_param_grid["param_names"]:
-        return True
-    return False
-
-
-def get_model_config(args, verbose=True):
-    """
-    Setup model configuration, including model class and all hyperparameter defaults.
-    Model configs also include a default grid search space.
-
-    :param model_name:
-    :param manual_config:
-    :param verbose:
-    :return:
-    """
-    if args.config:
-        args.config = json.load(open(args.config,"rU"))
-        model = get_model_class(args.config[u"model"])
-        model_class_params = args.config[u'model_class_params']
-        model_hyperparams  = args.config[u'model_hyperparams']
-        model_param_grid   = args.config[u'model_param_grid']
-        logger.info("Loaded model config from JSON file...")
-
-    # use model defaults
-    elif args.model:
-        model, model_class_params, model_hyperparams = get_default_config(args.model)
-        model_param_grid = {}
-        logger.info("Loaded model defaults...")
-
-    else:
-        logger.error("Please specify model config or model class type")
-        sys.exit()
-
-    # override parameter grid and model search num
-    if args.param_grid:
-        manual_param_grid = json.load(open(args.param_grid, "rU"))
-        args.n_model_search = len(manual_param_grid[u'params'])
-        logger.info("Using manual parameter grid, setting n_model_search={}".format(args.n_model_search))
-    else:
-        manual_param_grid = {}
-
-    # custom model parameters
-    if args.params:
-        params = convert_param_string(args.params)
-        # override any grid search settings
-        logger.info("Overriding some model hyperparameters")
-        # override any model_hyperparameter defaults
-        for name in params:
-            model_hyperparams[name] = params[name]
-
-    # override model params from command line
-    model_class_params['seed']       = args.seed
-    model_class_params['n_threads']  = args.n_procs
-    model_hyperparams['n_epochs']    = args.n_epochs
-    model_hyperparams['host_device'] = args.host_device
-
-    if verbose:
-        print_key_pairs(model_hyperparams, "Model Hyperparameters")
-
-    return model, model_class_params, model_hyperparams, model_param_grid, manual_param_grid
 
 
 def main(args):
