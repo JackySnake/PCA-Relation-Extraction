@@ -27,14 +27,14 @@ Install PyTorch for Linux (see [here](http://pytorch.org/) for OSX)
 conda install pytorch torchvision cuda80 -c soumith
 ```
 
-### Installing PCA/LSTM Code
+### Installing PCA / BiLSTM Code
  
 Once all Snorkel dependencies are installed, run 
 
 ```
 ./install.sh
 ```
-Snorkel requires a `SNORKELHOME` enviornment variable pointing to the parent directory of your install. On Linux/OSX, you can manuallly add this to your bash setup by editing `.bashrc` or `.bash_profile`. Otherwise, just run this script to temporarily setup your enviornment.
+Snorkel requires a `SNORKELHOME` environment variable pointing to the parent directory of your install. On Linux/OSX, you can manuallly add this to your bash setup by editing `.bashrc` or `.bash_profile`. Otherwise, just run this script to temporarily setup your environment.
 
 ```
 source ./set_env.sh
@@ -70,38 +70,74 @@ All BiLSTM and PCA model configurations are JSON files found in `config/`.
 The flag `--debug` trains on a 10% subset of data and is useful to test your installation.
 
 ```
-python benchmark.py -d cdr-supervised --config configs/lstm.json -E 50 --debug
+python benchmark.py --dataset cdr-supervised --config configs/lstm.json --n_epochs 10 --debug
 ```
 
 ## Training Models
 
+### Command Line Arguments
+```
+usage: benchmark.py [-h] [--info] [-d DATASET] [-m MODEL] [-c CONFIG]
+                    [-g PARAM_GRID] [-p PARAMS] [-o OUTDIR]
+                    [-N N_MODEL_SEARCH] [-E N_EPOCHS] [-W N_WORKERS]
+                    [-H HOST_DEVICE] [--debug] [--seed SEED] [--quiet]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --info                print all benchmark datasets
+  -d DATASET, --dataset DATASET
+                        dataset name
+  -m MODEL, --model MODEL
+                        model name
+  -c CONFIG, --config CONFIG
+                        load model config JSON
+  -g PARAM_GRID, --param_grid PARAM_GRID
+                        load manual parameter grid from JSON
+  -p PARAMS, --params PARAMS
+                        load `key=value,...` pairs from command line
+  -o OUTDIR, --outdir OUTDIR
+                        save model to outdir
+  -N N_MODEL_SEARCH, --n_model_search N_MODEL_SEARCH
+                        number of models to search over
+  -E N_EPOCHS, --n_epochs N_EPOCHS
+                        number of training epochs
+  -W N_WORKERS, --n_workers N_WORKERS
+                        number of grid search workers
+  -H HOST_DEVICE, --host_device HOST_DEVICE
+                        Host device (GPU|CPU)
+  --debug               train on data subset
+  --seed SEED           random model seed
+  --quiet               suppress logging
+```
+
+
 ### Train a basic BiLSTM
 
 ```
-python benchmark.py -d cdr-supervised --config configs/lstm.json --n_model_search 1 -E 50
+python benchmark.py -d cdr-supervised -c configs/lstm.json -N 1 -E 50
 ```
 
 This trains a BiLSTM *without* pre-trained embeddings for 50 epochs. 
 
 ### Train a BiLSTM + attention model with FastText embeddings
 
-You can override any of the parameters specified in the model JSON by passing in a string of of the format `<PARAM_NAME>=<VALUE>` seperated by a comma. 
+You can override any of the parameters specified in the model JSON by passing in a string of the format `<PARAM_NAME>=<VALUE>` (separating key/value pairs by a comma) to `-p`
 
 ```
-python benchmark.py -d cdr-supervised --config configs/lstm.json -p attention=True,word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" --n_model_search 1 -E 50
+python benchmark.py -d cdr-supervised -c configs/lstm.json -p attention=True,word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" -N 1 -E 50
 ```
 
 ### Train a PCA + exp. decay model with FastText embeddings
 
 ```
-python benchmark.py -d cdr-supervised --config configs/pca-kernel.json -p word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" --n_model_search 1 -E 50
+python benchmark.py -d cdr-supervised -c configs/pca-kernel.json -p word_emb_dim=300,word_emb_path="data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec" -N 1 -E 50
 ```
 
 ## Model Search
 Our config files contain the same hyperparameter search space used in our experiments, just pass in a value >1 for `n_model_search`. 
 
 ```
-python benchmark.py -d cdr-supervised --config configs/lstm.json --n_model_search 5 -E 50
+python benchmark.py -d cdr-supervised -c configs/lstm.json -N 5 -E 50
 ```
 
 We searched over 50 models for our inital experiments. The top 5 parameter configurations we found for BiLSTMs and PCA are in `config/top5/`.

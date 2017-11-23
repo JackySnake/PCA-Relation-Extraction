@@ -234,12 +234,12 @@ def main(args):
 if __name__ == "__main__":
 
     argparser = argparse.ArgumentParser()
-    argparser.add_argument("--info", action="store_true", help="show all datasets and models")
+    argparser.add_argument("--info", action="store_true", help="print all benchmark datasets")
     argparser.add_argument("-d", "--dataset", type=str, default="cdr-supervised", help="dataset name")
     argparser.add_argument("-m", "--model", type=str, default="lstm", help="model name")
     argparser.add_argument("-c", "--config", type=str, default=None, help="load model config JSON")
     argparser.add_argument("-g", "--param_grid", type=str, default=None, help="load manual parameter grid from JSON")
-    argparser.add_argument("-p", "--params", type=str, default=None, help="load `key=value,...` params from cmd line")
+    argparser.add_argument("-p", "--params", type=str, default=None, help="load `key=value,...` pairs from command line")
     argparser.add_argument("-o", "--outdir", type=str, default=None, help="save model to outdir")
 
     argparser.add_argument("-N", "--n_model_search", type=int, default=1, help="number of models to search over")
@@ -247,7 +247,7 @@ if __name__ == "__main__":
     argparser.add_argument("-W", "--n_workers", type=int, default=1, help="number of grid search workers")
     argparser.add_argument("-H", "--host_device", type=str, default="cpu", help="Host device (GPU|CPU)")
 
-    argparser.add_argument("--debug", action="store_true", default=False, help="Run subset debug test")
+    argparser.add_argument("--debug", action="store_true", default=False, help="train on data subset")
     argparser.add_argument("--seed", type=int, default=123, help="random model seed")
     argparser.add_argument("--quiet", action="store_true", help="suppress logging")
     args = argparser.parse_args()
