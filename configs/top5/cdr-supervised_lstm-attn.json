@@ -1,0 +1,10 @@
+{
+	"param_names": ["word_emb_path", "dropout", "batch_size", "n_epochs", "lr", "lstm_hidden_dim"],
+	"params": [
+		["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec", 0.50, 128, 200, 0.0010, 400],
+		["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec", 0.50, 256, 200, 0.0100, 100],
+		["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec", 0.25, 256, 200, 0.0100, 100],
+		["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec", 0.50, 64, 200, 0.0001, 100],
+		["data/embs/pubmed/fastText/300/pubmed.d300.w30.neg10.fasttext.vec", 0.25, 64, 200, 0.0001, 100]
+	]
+}
