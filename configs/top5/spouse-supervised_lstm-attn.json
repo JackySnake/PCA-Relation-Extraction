@@ -1,0 +1,10 @@
+{
+    "param_names":["word_emb_path", "dropout", "batch_size", "n_epochs", "lr", "lstm_hidden_dim"],
+    "params": [
+        ["data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec", 0.25, 128, 200, 0.0010, 200],
+        ["data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec", 0.50, 64, 200, 0.0010, 400],
+        ["data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec", 0.50, 128, 200, 0.0010, 400],
+        ["data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec", 0.50, 256, 200, 0.0001, 200],
+        ["data/embs/wiki/fastText/300/wiki.digit.case_sensitive.en.d300.w30.neg10.fasttext.vec", 0.50, 64, 200, 0.0001, 400]
+    ]
+}
